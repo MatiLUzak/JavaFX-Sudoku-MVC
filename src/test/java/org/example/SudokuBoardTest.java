@@ -35,54 +35,57 @@ public class SudokuBoardTest {
     }
 
     private boolean testIfBoardIsCorrect() {
-        for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
-            for (int j = 0; j < SudokuBoard.GRID_SIZE; j++) {
-                int number = sudokuBoard1.getBoard()[i][j];
-                if (number != 0) {
-                    if (!isValidTest(number, j, i)) {
-                        return false;
-                    }
+        sudokuBoard1.fillBoard();
+        int[][] borad = sudokuBoard1.getBoard();
+        for(int i = 0; i <SudokuBoard.GRID_SIZE ; i++){
+            if(!isNumberInRowTest(borad,i) || !isNumberInColumnTest(borad,i)){
+                return false;
+            }
+        }
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                if(!isNumberInSquareTest(borad,i*3,j*3)){
+                    return false;
                 }
             }
         }
         return true;
     }
 
-    private boolean isNumberInRowTest(int number, int row, int currentColumn) {
-        for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
-            if (i != currentColumn && sudokuBoard1.getBoard()[row][i] == number) {
-                return true;
+    private boolean isNumberInRowTest(int board[][],int row) {
+        boolean[] seen = new boolean[9];
+        for(int i = 0; i < 9; i++){
+            if(board[row][i] < 1 || board[row][i] > 9 || seen[board[row][i]-1]){
+                return false;
             }
+            seen[board[row][i] - 1] = true;
         }
-        return false;
+        return true;
     }
 
-    private boolean isNumberInColumnTest(int number, int column, int currentRow) {
-        for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
-            if (i != currentRow && sudokuBoard1.getBoard()[i][column] == number) {
-                return true;
+    private boolean isNumberInColumnTest(int board[][],int column) {
+        boolean[] seen = new boolean[9];
+        for(int i = 0; i < 9; i++){
+            if(board[i][column] < 1 || board[i][column] > 9 || seen[board[i][column]-1]){
+                return false;
             }
+            seen[board[i][column] - 1] = true;
         }
-        return false;
+        return true;
     }
 
-    private boolean isNumberInSquareTest(int number, int column, int row, int currentColumn, int currentRow) {
-        int localBoxRow = row - row % 3;
-        int localBoxColumn = column - column % 3;
-        for (int i = localBoxRow; i < localBoxRow + 3; i++) {
-            for (int j = localBoxColumn; j < localBoxColumn + 3; j++) {
-                if ((i != currentRow || j != currentColumn) && sudokuBoard1.getBoard()[i][j] == number) {
-                    return true;
+    private boolean isNumberInSquareTest(int board[][],int row, int column) {
+        boolean[] seen = new boolean[9];
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                int num = board[i+row][j+column];
+                if(num < 1 || num > 9 || seen[num-1]){
+                    return false;
                 }
+                seen[num - 1] = true;
             }
         }
-        return false;
-    }
-
-    private boolean isValidTest(int number, int column, int row) {
-        return !isNumberInColumnTest(number, column, row)
-                && !isNumberInRowTest(number, row, column)
-                && !isNumberInSquareTest(number, column, row, column, row);
+        return true;
     }
 
     @Test
