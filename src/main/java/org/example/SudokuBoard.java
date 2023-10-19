@@ -7,11 +7,8 @@ import java.util.List;
 public class SudokuBoard {
 
     private static final List<Integer> LIST = new ArrayList<>();
-    private static  final int GRID_SIZE = 9;
 
-    public static int getGridSize() {
-        return GRID_SIZE;
-    }
+    public static  final int GRID_SIZE = 9;
 
     private int[][] board = new int[GRID_SIZE][GRID_SIZE];
 
@@ -96,7 +93,7 @@ public class SudokuBoard {
     }
 
     public  void printArray() {
-        for (int i= 0; i < GRID_SIZE; i++) {
+        for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 System.out.print(board[i][j] + " ");
             }

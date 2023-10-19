@@ -22,8 +22,8 @@ public class SudokuBoardTest {
     @Test
     void testIsBoardFilled() {
         sudokuBoard1.fillBoard();
-        for (int i = 0; i < SudokuBoard.getGridSize(); i++) {
-            for (int j = 0; j < SudokuBoard.getGridSize(); j++) {
+        for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
+            for (int j = 0; j < SudokuBoard.GRID_SIZE; j++) {
                 assertTrue(sudokuBoard1.getBoard()[i][j] > 0, "Not every cell is filled");
             }
         }
@@ -35,8 +35,8 @@ public class SudokuBoardTest {
     }
 
     private boolean testIfBoardIsCorrect() {
-        for (int i = 0; i < SudokuBoard.getGridSize(); i++) {
-            for (int j = 0; j < SudokuBoard.getGridSize(); j++) {
+        for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
+            for (int j = 0; j < SudokuBoard.GRID_SIZE; j++) {
                 int number = sudokuBoard1.getBoard()[i][j];
                 if (number != 0) {
                     if (!isValidTest(number, j, i)) {
@@ -49,7 +49,7 @@ public class SudokuBoardTest {
     }
 
     private boolean isNumberInRowTest(int number, int row, int currentColumn) {
-        for (int i = 0; i < SudokuBoard.getGridSize(); i++) {
+        for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
             if (i != currentColumn && sudokuBoard1.getBoard()[row][i] == number) {
                 return true;
             }
@@ -58,7 +58,7 @@ public class SudokuBoardTest {
     }
 
     private boolean isNumberInColumnTest(int number, int column, int currentRow) {
-        for (int i = 0; i < SudokuBoard.getGridSize(); i++) {
+        for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
             if (i != currentRow && sudokuBoard1.getBoard()[i][column] == number) {
                 return true;
             }
