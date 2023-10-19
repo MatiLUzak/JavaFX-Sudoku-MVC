@@ -52,7 +52,7 @@ public class SudokuBoardTest {
         return true;
     }
 
-    private boolean isNumberInRowTest(int board[][],int row) {
+    private boolean isNumberInRowTest(int[][] board,int row) {
         boolean[] seen = new boolean[9];
         for(int i = 0; i < 9; i++){
             if(board[row][i] < 1 || board[row][i] > 9 || seen[board[row][i]-1]){
@@ -63,7 +63,7 @@ public class SudokuBoardTest {
         return true;
     }
 
-    private boolean isNumberInColumnTest(int board[][],int column) {
+    private boolean isNumberInColumnTest(int[][] board,int column) {
         boolean[] seen = new boolean[9];
         for(int i = 0; i < 9; i++){
             if(board[i][column] < 1 || board[i][column] > 9 || seen[board[i][column]-1]){
@@ -74,7 +74,7 @@ public class SudokuBoardTest {
         return true;
     }
 
-    private boolean isNumberInSquareTest(int board[][],int row, int column) {
+    private boolean isNumberInSquareTest(int[][] board,int row, int column) {
         boolean[] seen = new boolean[9];
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
