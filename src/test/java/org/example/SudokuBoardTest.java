@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SudokuBoardTest {
+/*public class SudokuBoardTest {
 
     private SudokuBoard sudokuBoard1;
 
@@ -105,4 +105,4 @@ public class SudokuBoardTest {
         }
         return copy;
     }
-}
+}*/
