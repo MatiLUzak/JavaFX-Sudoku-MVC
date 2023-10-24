@@ -37,8 +37,6 @@ public class SudokuBoard {
     public void checkBoard() {
         if (testIfBoardIsCorrect()) {
             System.out.printf("Board is correct");
-        } else {
-            System.out.printf("Board is incorrect");
         }
     }
 
