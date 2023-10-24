@@ -56,7 +56,7 @@ public class SudokuBoard {
         return true;
     }
 
-    private boolean isNumberInRowTest( int row) {
+    private boolean isNumberInRowTest(int row) {
         boolean[] seen = new boolean[9];
         for (int i = 0; i < 9; i++) {
             if (board[row][i] < 1 || board[row][i] > 9 || seen[board[row][i] - 1]) {
