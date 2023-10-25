@@ -92,8 +92,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         Collections.shuffle(LIST);
         if (solveBoard(board)) {
             System.out.println("Sudoku Board has been created");
-        } else {
-            System.out.println("Error while creating Sudoku Board");
         }
     }
 }

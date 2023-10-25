@@ -34,13 +34,8 @@ public class SudokuBoard {
         solver.solve(this);
     }
 
-    public void checkBoard() {
-        if (testIfBoardIsCorrect()) {
-            System.out.printf("Board is correct");
-        }
-    }
 
-    private boolean testIfBoardIsCorrect() {
+    public boolean checkBoard() {
         for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
             if (!isNumberInRowTest(i) || !isNumberInColumnTest(i)) {
                 return false;
