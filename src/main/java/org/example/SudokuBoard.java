@@ -7,95 +7,64 @@ public class SudokuBoard {
     private SudokuSolver solver;
     public static  final int GRID_SIZE = 9;
 
-    private int[][] board;
+    private SudokuField[][] board;
 
     public SudokuBoard(SudokuSolver solver) {
-        this.board = new int[GRID_SIZE][GRID_SIZE];
         this.solver = solver;
-    }
-
-    public int[][] getBoard() {
-        int [][] copy = new int[GRID_SIZE][];
-        for (int i = 0; i < GRID_SIZE; i++) {
-            copy[i] = board[i].clone();
+        board = new SudokuField[GRID_SIZE][GRID_SIZE];
+        for (int row = 0; row < GRID_SIZE; row++) {
+            for (int col = 0; col < GRID_SIZE; col++) {
+                board[row][col] = new SudokuField();
+            }
         }
-        return copy;
     }
 
     public int get(int x, int y) {
-        return board[x][y];
+        return board[x][y].getValue();
     }
 
     public void set(int x, int y, int value) {
-        board[x][y] = value;
+        board[x][y].setValue(value);
     }
 
     public  void solveGame() {
         solver.solve(this);
     }
+    public SudokuRow getRow(int y) {
+        return new SudokuRow(board[y]);
+    }
 
+    public SudokuColumn getColumn(int x) {
+        SudokuField[] column = new SudokuField[GRID_SIZE];
+        for (int y = 0; y < GRID_SIZE; y++) {
+            column[y] = board[y][x];
+        }
+        return new SudokuColumn(column);
+    }
+
+    public SudokuBox getBox(int row, int col) {
+        SudokuField[][] box = new SudokuField[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                box[i][j] = board[row + i][col + j];
+            }
+        }
+        return new SudokuBox(box);
+    }
 
     public boolean checkBoard() {
-        for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
-            if (!isNumberInRowTest(i) || !isNumberInColumnTest(i)) {
-                return false;
-            }
-        }
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (!isNumberInSquareTest(i * 3,j * 3)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private boolean isNumberInRowTest(int row) {
-        boolean[] seen = new boolean[9];
-        for (int i = 0; i < 9; i++) {
-            if (board[row][i] < 1 || board[row][i] > 9 || seen[board[row][i] - 1]) {
-                return false;
-            }
-            seen[board[row][i] - 1] = true;
-        }
-        return true;
-    }
-
-    private boolean isNumberInColumnTest(int column) {
-        boolean[] seen = new boolean[9];
-        for (int i = 0; i < 9; i++) {
-            if (board[i][column] < 1 || board[i][column] > 9 || seen[board[i][column] - 1]) {
-                return false;
-            }
-            seen[board[i][column] - 1] = true;
-        }
-        return true;
-    }
-
-    private boolean isNumberInSquareTest(int row, int column) {
-        boolean[] seen = new boolean[9];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                int num = board[i + row][j + column];
-                if (num < 1 || num > 9 || seen[num - 1]) {
-                    return false;
-                }
-                seen[num - 1] = true;
-            }
-        }
-        return true;
-    }
-
-    /* public  void printArray() {xdd
         for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < GRID_SIZE; j++) {
-                System.out.print(board[i][j] + " ");
+            if (!getRow(i).verify() || !getColumn(i).verify()) {
+                return false;
             }
-            System.out.println();
         }
-    }*/
-
-
-
+        for (int row = 0; row < GRID_SIZE; row += 3) {
+            for (int col = 0; col < GRID_SIZE; col += 3) {
+                if (!getBox(row, col).verify()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
