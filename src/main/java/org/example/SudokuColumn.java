@@ -4,6 +4,9 @@ public class SudokuColumn implements SudokuStructure{
     private SudokuField[] fields;
 
     public SudokuColumn(SudokuField[] fields) {
+        if (fields == null) {
+            throw new IllegalArgumentException("Fields array cannot be null");
+        }
         this.fields = fields;
     }
 

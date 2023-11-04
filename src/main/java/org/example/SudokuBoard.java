@@ -10,6 +10,9 @@ public class SudokuBoard {
     private SudokuField[][] board;
 
     public SudokuBoard(SudokuSolver solver) {
+        if (solver == null) {
+            throw new IllegalArgumentException("Solver cannot be null");
+        }
         this.solver = solver;
         board = new SudokuField[GRID_SIZE][GRID_SIZE];
         for (int row = 0; row < GRID_SIZE; row++) {
