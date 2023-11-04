@@ -10,7 +10,7 @@ public class SudokuColumnTest {
         assertThrows(IllegalArgumentException.class, () -> new SudokuColumn(null));
     }
     @Test
-    void TestVerifyRow(){
+    void TestVerifyColumn(){
         SudokuField[] fields = new SudokuField[SudokuBoard.GRID_SIZE];
         for(int i = 0; i < fields.length; i++){
             fields[i]=new SudokuField();
@@ -18,8 +18,8 @@ public class SudokuColumnTest {
         }
         SudokuColumn column = new SudokuColumn(fields);
         assertTrue(column.verify());
-        fields[0].setValue(0);
-        fields[1].setValue(0);
+        fields[0].setValue(1);
+        fields[1].setValue(1);
         assertFalse(column.verify());
     }
 }

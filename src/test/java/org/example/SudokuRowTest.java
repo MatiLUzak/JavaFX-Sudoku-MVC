@@ -16,8 +16,8 @@ public class SudokuRowTest {
         }
         SudokuRow row = new SudokuRow(fields);
         assertTrue(row.verify());
-        fields[0].setValue(0);
-        fields[1].setValue(0);
+        fields[0].setValue(1);
+        fields[1].setValue(1);
         assertFalse(row.verify());
     }
 }
