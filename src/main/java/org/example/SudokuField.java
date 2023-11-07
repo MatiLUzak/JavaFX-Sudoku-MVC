@@ -1,14 +1,14 @@
 package org.example;
 
-import java.beans.PropertyChangeSupport;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class SudokuField {
     private int value;
     private PropertyChangeSupport support;
 
     public SudokuField() {
-        support =new PropertyChangeSupport(this);
+        support = new PropertyChangeSupport(this);
     }
 
     public int getValue() {

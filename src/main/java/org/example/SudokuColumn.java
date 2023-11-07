@@ -1,6 +1,6 @@
 package org.example;
 
-public class SudokuColumn implements SudokuStructure{
+public class SudokuColumn implements SudokuStructure {
     private SudokuField[] fields;
 
     public SudokuColumn(SudokuField[] fields) {

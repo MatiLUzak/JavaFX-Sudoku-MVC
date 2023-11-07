@@ -33,6 +33,7 @@ public class SudokuBoard {
     public  void solveGame() {
         solver.solve(this);
     }
+
     public SudokuRow getRow(int y) {
         return new SudokuRow(board[y]);
     }
