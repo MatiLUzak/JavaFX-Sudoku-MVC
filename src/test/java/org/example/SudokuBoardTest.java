@@ -96,6 +96,12 @@ class SudokuBoardTest {
         assertTrue(box.verify());
     }
     @Test
+    void checkBoard() {
+        board.solveGame();
+        assertTrue(board.checkBoard());
+    }
+
+    @Test
     void solveboardtest() {
         board.solveGame();
         assertTrue(checkBoard1());
