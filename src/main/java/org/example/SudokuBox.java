@@ -1,6 +1,6 @@
 package org.example;
 
-public class SudokuBox implements SudokuStructure {
+public class SudokuBox  {
     private  SudokuField[][] fields;
 
     public SudokuBox(SudokuField[][] fields) {
@@ -10,7 +10,6 @@ public class SudokuBox implements SudokuStructure {
         this.fields = fields;
     }
 
-    @Override
     public boolean verify() {
         boolean[] seen = new boolean[9];
         for (int i = 0; i < 3; i++) {
