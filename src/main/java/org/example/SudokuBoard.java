@@ -1,55 +1,54 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SudokuBoard {
 
     private SudokuSolver solver;
-    public static  final int GRID_SIZE = 9;
+    public static final int GRID_SIZE = 9;
 
-    private List<List<SudokuField>> board;
+    private SudokuField[][] board;
 
     public SudokuBoard(SudokuSolver solver) {
         if (solver == null) {
             throw new IllegalArgumentException("Solver cannot be null");
         }
         this.solver = solver;
-        board = new ArrayList<>(GRID_SIZE);
+        board = new SudokuField[GRID_SIZE][GRID_SIZE];
         for (int i = 0; i < GRID_SIZE; i++) {
-            List<SudokuField> row = new ArrayList<>();
             for (int j = 0; j < GRID_SIZE; j++) {
-                row.add(new SudokuField());
+                board[i][j] = new SudokuField();
             }
-            board.add(Collections.unmodifiableList(row));
         }
     }
 
     public int get(int x, int y) {
-
-        return board.get(x).get(y).getValue();
+        return board[x][y].getValue();
     }
 
     public void set(int x, int y, int value) {
-
-        board.get(x).get(y).setValue(value);
+        board[x][y].setValue(value);
     }
 
-    public  void solveGame() {
+    public void solveGame() {
         solver.solve(this);
     }
 
     public SudokuRow getRow(int y) {
-        return new SudokuRow(new ArrayList<>(board.get(y)));
+        List<SudokuField> rowList = new ArrayList<>(GRID_SIZE);
+        for (int i = 0; i < GRID_SIZE; i++) {
+            rowList.add(board[y][i]);
+        }
+        return new SudokuRow(rowList);
     }
 
     public SudokuColumn getColumn(int x) {
-        List<SudokuField> column = new ArrayList<>(GRID_SIZE);
-        for (int y = 0; y < GRID_SIZE; y++) {
-            column.add(board.get(y).get(x));
+        List<SudokuField> columnList = new ArrayList<>(GRID_SIZE);
+        for (int i = 0; i < GRID_SIZE; i++) {
+            columnList.add(board[i][x]);
         }
-        return new SudokuColumn(column);
+        return new SudokuColumn(columnList);
     }
 
     public SudokuBox getBox(int row, int col) {
@@ -57,7 +56,7 @@ public class SudokuBoard {
         for (int i = 0; i < 3; i++) {
             List<SudokuField> boxRow = new ArrayList<>(3);
             for (int j = 0; j < 3; j++) {
-                boxRow.add(board.get(row + i).get(col + j));
+                boxRow.add(board[row / 3 * 3 + i][col / 3 * 3 + j]);
             }
             boxFields.add(boxRow);
         }
@@ -79,4 +78,5 @@ public class SudokuBoard {
         }
         return true;
     }
+
 }
