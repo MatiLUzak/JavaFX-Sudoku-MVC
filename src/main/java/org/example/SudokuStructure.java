@@ -1,9 +1,11 @@
 package org.example;
 
-public abstract class SudokuStructure {
-    protected SudokuField[] fields;
+import java.util.List;
 
-    public SudokuStructure(SudokuField[] fields) {
+public abstract class SudokuStructure {
+    protected List<SudokuField> fields;
+
+    public SudokuStructure(List<SudokuField> fields) {
         if (fields == null) {
             throw new IllegalArgumentException("Fields array cannot be null");
         }

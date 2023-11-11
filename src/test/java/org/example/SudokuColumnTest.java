@@ -2,6 +2,9 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SudokuColumnTest {
@@ -11,15 +14,16 @@ public class SudokuColumnTest {
     }
     @Test
     void TestVerifyColumn(){
-        SudokuField[] fields = new SudokuField[SudokuBoard.GRID_SIZE];
-        for(int i = 0; i < fields.length; i++){
-            fields[i]=new SudokuField();
-            fields[i].setValue(i+1);
+        List<SudokuField> fields = new ArrayList<>();
+        for(int i = 0; i < SudokuBoard.GRID_SIZE; i++){
+            SudokuField field = new SudokuField();
+            field.setValue(i + 1);
+            fields.add(field);
         }
         SudokuColumn column = new SudokuColumn(fields);
         assertTrue(column.verify());
-        fields[0].setValue(1);
-        fields[1].setValue(1);
+        fields.get(0).setValue(1);
+        fields.get(1).setValue(1);
         assertFalse(column.verify());
     }
 }

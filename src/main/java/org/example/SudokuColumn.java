@@ -1,8 +1,10 @@
 package org.example;
 
+import java.util.List;
+
 public class SudokuColumn extends SudokuStructure {
 
-    public SudokuColumn(SudokuField[] fields) {
+    public SudokuColumn(List<SudokuField> fields) {
         super(fields);
     }
 
