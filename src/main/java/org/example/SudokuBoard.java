@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SudokuBoard {
@@ -36,28 +37,31 @@ public class SudokuBoard {
     }
 
     public SudokuRow getRow(int y) {
-        List<SudokuField> rowList = new ArrayList<>(GRID_SIZE);
+        SudokuField[] rowArray = new SudokuField[GRID_SIZE];
         for (int i = 0; i < GRID_SIZE; i++) {
-            rowList.add(board[y][i]);
+            rowArray[i] = board[y][i];
         }
+        List<SudokuField> rowList = Arrays.asList(rowArray);
         return new SudokuRow(rowList);
     }
 
     public SudokuColumn getColumn(int x) {
-        List<SudokuField> columnList = new ArrayList<>(GRID_SIZE);
+        SudokuField[] columnArray = new SudokuField[GRID_SIZE];
         for (int i = 0; i < GRID_SIZE; i++) {
-            columnList.add(board[i][x]);
+            columnArray[i] = board[i][x];
         }
+        List<SudokuField> columnList = Arrays.asList(columnArray);
         return new SudokuColumn(columnList);
     }
 
     public SudokuBox getBox(int row, int col) {
         List<List<SudokuField>> boxFields = new ArrayList<>(3);
         for (int i = 0; i < 3; i++) {
-            List<SudokuField> boxRow = new ArrayList<>(3);
+            SudokuField[] boxRowArray = new SudokuField[3];
             for (int j = 0; j < 3; j++) {
-                boxRow.add(board[row / 3 * 3 + i][col / 3 * 3 + j]);
+                boxRowArray[j] = board[row / 3 * 3 + i][col / 3 * 3 + j];
             }
+            List<SudokuField> boxRow = Arrays.asList(boxRowArray);
             boxFields.add(boxRow);
         }
         return new SudokuBox(boxFields);
