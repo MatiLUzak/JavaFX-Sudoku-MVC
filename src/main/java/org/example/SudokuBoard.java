@@ -37,6 +37,9 @@ public class SudokuBoard {
     }
 
     public SudokuRow getRow(int y) {
+        if (y < 0 || y >= GRID_SIZE) {
+            throw new IllegalArgumentException("Row index out of bounds");
+        }
         SudokuField[] rowArray = new SudokuField[GRID_SIZE];
         for (int i = 0; i < GRID_SIZE; i++) {
             rowArray[i] = board[y][i];
@@ -46,6 +49,9 @@ public class SudokuBoard {
     }
 
     public SudokuColumn getColumn(int x) {
+        if (x < 0 || x >= GRID_SIZE) {
+            throw new IllegalArgumentException("Column index out of bounds");
+        }
         SudokuField[] columnArray = new SudokuField[GRID_SIZE];
         for (int i = 0; i < GRID_SIZE; i++) {
             columnArray[i] = board[i][x];
@@ -55,6 +61,9 @@ public class SudokuBoard {
     }
 
     public SudokuBox getBox(int row, int col) {
+        if (row < 0 || row > GRID_SIZE - 3 || col < 0 || col > GRID_SIZE - 3) {
+            throw new IllegalArgumentException("Box index out of bounds");
+        }
         List<List<SudokuField>> boxFields = new ArrayList<>(3);
         for (int i = 0; i < 3; i++) {
             SudokuField[] boxRowArray = new SudokuField[3];

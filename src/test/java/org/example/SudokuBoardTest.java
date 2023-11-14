@@ -81,6 +81,16 @@ class SudokuBoardTest {
     }
 
     @Test
+    public void testGetRowOutOfBounds() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.getRow(-1);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.getRow(9);
+        });
+    }
+
+    @Test
     void testgetColumn() {
         board.solveGame();
         SudokuColumn column = board.getColumn(0);
@@ -89,11 +99,32 @@ class SudokuBoardTest {
     }
 
     @Test
+    public void testGetColumnOutOfBounds() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.getColumn(-1);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.getColumn(9);
+        });
+    }
+
+    @Test
     void testgetBox() {
         board.solveGame();
         SudokuBox box = board.getBox(0, 0);
         assertNotNull(box);
         assertTrue(box.verify());
+    }
+
+    @Test
+    public void testGetBoxOutOfBounds() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.getBox(-1, -1);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.getBox(7, 7);
+        });
     }
     @Test
     void checkBoard() {
