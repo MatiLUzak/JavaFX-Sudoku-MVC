@@ -18,6 +18,15 @@
 
     <description>Projekt grupy laboratoryjnej jm_cz_1200_02</description>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+            <comments>The MIT License is included in the project, see the LICENSE file in the project root for full license text.</comments>
+        </license>
+    </licenses>
+
     <properties>
         <maven.compiler.source>20</maven.compiler.source>
         <maven.compiler.target>20</maven.compiler.target>
