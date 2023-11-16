@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -64,16 +63,16 @@ public class SudokuBoard {
         if (row < 0 || row > GRID_SIZE - 3 || col < 0 || col > GRID_SIZE - 3) {
             throw new IllegalArgumentException("Box index out of bounds");
         }
-        List<List<SudokuField>> boxFields = new ArrayList<>(3);
-        for (int i = 0; i < 3; i++) {
-            SudokuField[] boxRowArray = new SudokuField[3];
-            for (int j = 0; j < 3; j++) {
-                boxRowArray[j] = board[row / 3 * 3 + i][col / 3 * 3 + j];
+        SudokuField[] boxRowArray = new SudokuField[GRID_SIZE];
+        int x = 0;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    boxRowArray[x] = board[row / 3 * 3 + i][col / 3 * 3 + j];
+                    x++;
+                }
             }
-            List<SudokuField> boxRow = Arrays.asList(boxRowArray);
-            boxFields.add(boxRow);
-        }
-        return new SudokuBox(boxFields);
+        List<SudokuField> boxList = Arrays.asList(boxRowArray);
+        return new SudokuBox(boxList);
     }
 
     public boolean checkBoard() {

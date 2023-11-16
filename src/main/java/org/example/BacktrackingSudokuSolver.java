@@ -90,8 +90,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
     private void fillBoard(SudokuBoard board) {
         fillArrayWithZero(board);
         Collections.shuffle(LIST);
-        if (solveBoard(board)) {
-            System.out.println("Sudoku Board has been created");
-        }
+        solveBoard(board);
     }
 }
