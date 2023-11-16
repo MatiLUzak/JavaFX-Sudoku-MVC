@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.List;
 
-public abstract class SudokuStructure {
+public class SudokuStructure {
     protected List<SudokuField> fields;
 
     public SudokuStructure(List<SudokuField> fields) {

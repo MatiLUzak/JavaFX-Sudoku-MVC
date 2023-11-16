@@ -125,6 +125,14 @@ class SudokuBoardTest {
         assertThrows(IllegalArgumentException.class, () -> {
             board.getBox(7, 7);
         });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.getBox(SudokuBoard.GRID_SIZE - 2, -1);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.getBox(-1, SudokuBoard.GRID_SIZE - 2);
+        });
     }
     @Test
     void checkBoard() {
