@@ -118,21 +118,22 @@ class SudokuBoardTest {
 
     @Test
     public void testGetBoxOutOfBounds() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            board.getBox(-1, -1);
-        });
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            board.getBox(7, 7);
-        });
+        assertThrows(IllegalArgumentException.class, () -> board.getBox(-1, 0));
+        assertThrows(IllegalArgumentException.class, () -> board.getBox(0, -1));
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            board.getBox(SudokuBoard.GRID_SIZE - 2, -1);
-        });
+        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE - 2, SudokuBoard.GRID_SIZE));
+        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, SudokuBoard.GRID_SIZE - 2));
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            board.getBox(-1, SudokuBoard.GRID_SIZE - 2);
-        });
+        assertThrows(IllegalArgumentException.class, () -> board.getBox(-1, -1));
+        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, SudokuBoard.GRID_SIZE));
+
+        assertThrows(IllegalArgumentException.class, () -> board.getBox(-1, SudokuBoard.GRID_SIZE));
+        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, -1));
+
+        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE - 2, SudokuBoard.GRID_SIZE - 2));
+        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, SudokuBoard.GRID_SIZE - 3));
+        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE - 3, SudokuBoard.GRID_SIZE));
     }
     @Test
     void checkBoard() {
