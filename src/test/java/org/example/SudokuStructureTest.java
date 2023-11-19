@@ -53,6 +53,70 @@ public class SudokuStructureTest {
             assertFalse(structure.verify());
         }
 
+    @Test
+    void testToString() {
+        SudokuStructure structure = new SudokuStructure(fields);
+        String toStringResult = structure.toString();
+        assertNotNull(toStringResult);
+        assertFalse(toStringResult.trim().isEmpty());
+    }
+
+    @Test
+    void testEqualsDirectly() {
+        List<SudokuField> fields2 = new ArrayList<>();
+        for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
+            SudokuField field = new SudokuField();
+            field.setValue(i + 1);
+            fields2.add(field);
+        }
+        SudokuStructure structure1 = new SudokuStructure(fields);
+        SudokuStructure structure2 = new SudokuStructure(fields2);
+
+        assertTrue(structure1.equals(structure2), "The two structures should be equal.");
+
+        structure2.fields.get(0).setValue(8);
+
+        assertFalse(structure1.equals(structure2), "The two structures should not be equal after changing a value in one of them.");
+    }
+
+    @Test
+    void testEqualsWithItself() {
+        SudokuStructure structure = new SudokuStructure(fields);
+        assertTrue(structure.equals(structure), "An object should be equal to itself.");
+    }
+
+    @Test
+    void testEqualsWithNull() {
+        SudokuStructure structure = new SudokuStructure(fields);
+        assertFalse(structure.equals(null), "An object should not be equal to null.");
+    }
+
+    @Test
+    void testEqualsWithDifferentClass() {
+        SudokuStructure structure = new SudokuStructure(fields);
+        assertFalse(structure.equals(new Object()), "An object should not be equal to an object of a different class.");
+    }
+
+
+
+    @Test
+    void testHashCode() {
+
+        List<SudokuField> fields2 = new ArrayList<>();
+        for(int i = 0; i < SudokuBoard.GRID_SIZE; i++){
+            SudokuField field = new SudokuField();
+            field.setValue(i + 1);
+            fields2.add(field);
+        }
+        SudokuStructure structure1 = new SudokuStructure(fields);
+        SudokuStructure structure2 = new SudokuStructure(fields2);
+        assertEquals(structure1, structure2);
+        assertEquals(structure1.hashCode(), structure2.hashCode());
+
+        structure2.fields.get(0).setValue(8); // Zmiana wartości w jednym z pól
+        assertNotEquals(structure1.hashCode(), structure2.hashCode());
+    }
+
     }
 
 
