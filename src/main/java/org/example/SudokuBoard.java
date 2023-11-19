@@ -1,5 +1,9 @@
 package org.example;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,6 +25,40 @@ public class SudokuBoard {
                 board[i][j] = new SudokuField();
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        ToStringBuilder toStringBuilder = new ToStringBuilder(this);
+        for (SudokuField[] row : board) {
+            toStringBuilder.append(Arrays.toString(row));
+        }
+        return toStringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        SudokuBoard that = (SudokuBoard) obj;
+        return new EqualsBuilder()
+                .append(solver, that.solver)
+                .append(GRID_SIZE, that.GRID_SIZE)
+                .append(board, that.board)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(solver)
+                .append(GRID_SIZE)
+                .append(board)
+                .toHashCode();
     }
 
     public int get(int x, int y) {

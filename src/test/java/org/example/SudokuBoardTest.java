@@ -27,6 +27,42 @@ class SudokuBoardTest {
     }
 
     @Test
+    void testToString() {
+        String result = board.toString();
+        assertNotNull(result);
+        assertFalse(result.trim().isEmpty());
+    }
+
+    @Test
+    void testEquals() {
+
+        assertTrue(board.equals(board), "Board should be equal to itself.");
+
+        SudokuBoard anotherBoard = new SudokuBoard(solver);
+        board.set(0, 0, 5);
+        anotherBoard.set(0, 0, 5);
+        assertTrue(board.equals(anotherBoard), "Boards with the same values should be equal.");
+
+        anotherBoard.set(0, 0, 1);
+        assertFalse(board.equals(anotherBoard), "Boards with different values should not be equal.");
+
+        assertFalse(board.equals(null), "Board should not be equal to null.");
+
+        assertFalse(board.equals(new Object()), "Board should not be equal to an object of a different type.");
+    }
+
+
+    @Test
+    void testHashCode() {
+        SudokuBoard anotherBoard = new SudokuBoard(solver);
+        board.set(0, 0, 5);
+        anotherBoard.set(0, 0, 5);
+        assertEquals(anotherBoard.hashCode(), board.hashCode());
+    }
+
+
+
+    @Test
     void testGetAndSet() {
         board.set(0, 0, 1);
         assertEquals(1, board.get(0, 0));
