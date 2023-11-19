@@ -1,5 +1,8 @@
 package org.example;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,6 +22,31 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
     @Override
     public void solve(SudokuBoard board) {
         fillBoard(board);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("LIST", LIST)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        //BacktrackingSudokuSolver that = (BacktrackingSudokuSolver) obj;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .toHashCode();
     }
 
     private void fillArrayWithZero(SudokuBoard board) {
