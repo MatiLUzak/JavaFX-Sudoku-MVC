@@ -19,16 +19,10 @@ public class BacktrackingSudokuSolverTest {
     }
 
     @Test
-    void testEqualsWithAnotherSolver() {
-        BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
-        BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
-        assertTrue(solver1.equals(solver2), "All solvers should be equal because they share the same static list.");
-    }
-
-    @Test
     void testHashCodeConsistentWithEquals() {
         BacktrackingSudokuSolver solver1 = new BacktrackingSudokuSolver();
         BacktrackingSudokuSolver solver2 = new BacktrackingSudokuSolver();
+        assertTrue(solver1.equals(solver2), "All solvers should be equal because they share the same static list.");
         assertEquals(solver1.hashCode(), solver2.hashCode(), "Hash codes should be the same for all solvers.");
     }
 

@@ -62,7 +62,7 @@ public class SudokuStructureTest {
     }
 
     @Test
-    void testEqualsDirectly() {
+    void testEqualsAndHashCodeConsistency() {
         List<SudokuField> fields2 = new ArrayList<>();
         for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
             SudokuField field = new SudokuField();
@@ -73,10 +73,12 @@ public class SudokuStructureTest {
         SudokuStructure structure2 = new SudokuStructure(fields2);
 
         assertTrue(structure1.equals(structure2), "The two structures should be equal.");
+        assertEquals(structure1.hashCode(), structure2.hashCode(), "Equal objects must have equal hash codes.");
 
         structure2.fields.get(0).setValue(8);
 
         assertFalse(structure1.equals(structure2), "The two structures should not be equal after changing a value in one of them.");
+        assertNotEquals(structure1.hashCode(), structure2.hashCode(), "Equal objects must have equal hash codes.");
     }
 
     @Test

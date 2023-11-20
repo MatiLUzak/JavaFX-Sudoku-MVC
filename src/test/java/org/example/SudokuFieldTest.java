@@ -51,6 +51,7 @@ public class SudokuFieldTest {
         field1.setValue(5);
         SudokuField field2 = new SudokuField();
         field2.setValue(5);
+        assertTrue(field1.equals(field2), "A field should be equal to itself.");
         assertEquals(field1.hashCode(), field2.hashCode(), "Hash codes should be the same for equal objects.");
     }
 }
