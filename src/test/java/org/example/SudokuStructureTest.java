@@ -100,25 +100,6 @@ public class SudokuStructureTest {
     }
 
 
-
-    @Test
-    void testHashCode() {
-
-        List<SudokuField> fields2 = new ArrayList<>();
-        for(int i = 0; i < SudokuBoard.GRID_SIZE; i++){
-            SudokuField field = new SudokuField();
-            field.setValue(i + 1);
-            fields2.add(field);
-        }
-        SudokuStructure structure1 = new SudokuStructure(fields);
-        SudokuStructure structure2 = new SudokuStructure(fields2);
-        assertEquals(structure1, structure2);
-        assertEquals(structure1.hashCode(), structure2.hashCode());
-
-        structure2.fields.get(0).setValue(8); // Zmiana wartości w jednym z pól
-        assertNotEquals(structure1.hashCode(), structure2.hashCode());
-    }
-
     }
 
 

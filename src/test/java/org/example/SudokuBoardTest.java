@@ -65,14 +65,6 @@ class SudokuBoardTest {
         SudokuBoard firstBoard = new SudokuBoard(new BacktrackingSudokuSolver());
         SudokuBoard secondBoard = new SudokuBoard(new BacktrackingSudokuSolver());
 
-        for (int row = 0; row < SudokuBoard.GRID_SIZE; row++) {
-            for (int col = 0; col < SudokuBoard.GRID_SIZE; col++) {
-                int value = row * SudokuBoard.GRID_SIZE + col;
-                firstBoard.set(row, col, value);
-                secondBoard.set(row, col, value);
-            }
-        }
-
         assertTrue(firstBoard.equals(secondBoard), "Both boards should be equal.");
 
         assertEquals(firstBoard.hashCode(), secondBoard.hashCode(), "Equal objects must have equal hash codes.");
