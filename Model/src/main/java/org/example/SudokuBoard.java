@@ -4,13 +4,17 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class SudokuBoard {
+public class SudokuBoard implements Serializable {
 
     private SudokuSolver solver;
     public static final int GRID_SIZE = 9;
+
+    private static final long serialVersionUID = 1L;
+
 
     private SudokuField[][] board;
 

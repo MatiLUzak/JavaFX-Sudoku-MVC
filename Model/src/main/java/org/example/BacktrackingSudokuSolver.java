@@ -1,14 +1,17 @@
 package org.example;
 
+
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BacktrackingSudokuSolver implements SudokuSolver {
+public class BacktrackingSudokuSolver implements SudokuSolver,Serializable {
 
+    private static final long serialVersionUID = 1L;
     public static final int GRID_SIZE = 9;
 
     private static final List<Integer> LIST = new ArrayList<>();
