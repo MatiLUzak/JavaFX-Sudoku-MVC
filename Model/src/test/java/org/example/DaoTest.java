@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DaoTest {
 
@@ -28,6 +27,12 @@ public class DaoTest {
 
             assertEquals(expectedBoard, actualBoard);
         }
+    }
+
+    @Test
+    public void testSudokuBoardDaoFactoryNotNull(){
+        SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
+        assertNotNull(factory);
     }
 
     @AfterEach
