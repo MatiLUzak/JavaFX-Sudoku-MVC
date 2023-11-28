@@ -26,6 +26,7 @@ public class DaoTest {
             SudokuBoard actualBoard = dao.read();
 
             assertEquals(expectedBoard, actualBoard);
+            assertEquals(expectedBoard.hashCode(),actualBoard.hashCode());
         }
     }
 
