@@ -2,7 +2,7 @@ package org.example;
 
 import java.io.*;
 
-public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
+public class FileSudokuBoardDao implements Dao<SudokuBoard> {
 
     private final String fileName;
 
