@@ -259,6 +259,45 @@ class SudokuBoardTest {
         }
         return true;
     }
+    @Test
+    void testRemoveFields() {
+        // Ustawiamy planszę
+        board.solveGame();
+        // Zapisujemy stan planszy przed usunięciem pól
+        SudokuBoard originalBoard = board.clone();
+
+        // Usuwamy pola na poziomie EASY
+        board.removeFields(Difficulty.EASY);
+        // Liczymy ile pól zostało usuniętych
+        int emptyFields = countEmptyFields(board);
+
+        // Sprawdzamy czy liczba pustych pól zgadza się z oczekiwaną
+        assertEquals(Difficulty.EASY.getFieldsToRemove(), emptyFields, "Liczba usuniętych pól nie zgadza się z poziomem trudności EASY.");
+
+        // Powtarzamy dla pozostałych poziomów trudności
+        board = originalBoard.clone();
+        board.removeFields(Difficulty.MEDIUM);
+        emptyFields = countEmptyFields(board);
+        assertEquals(Difficulty.MEDIUM.getFieldsToRemove(), emptyFields, "Liczba usuniętych pól nie zgadza się z poziomem trudności MEDIUM.");
+
+        board = originalBoard.clone();
+        board.removeFields(Difficulty.HARD);
+        emptyFields = countEmptyFields(board);
+        assertEquals(Difficulty.HARD.getFieldsToRemove(), emptyFields, "Liczba usuniętych pól nie zgadza się z poziomem trudności HARD.");
+    }
+
+    private int countEmptyFields(SudokuBoard board) {
+        int emptyCount = 0;
+        for (int row = 0; row < SudokuBoard.GRID_SIZE; row++) {
+            for (int col = 0; col < SudokuBoard.GRID_SIZE; col++) {
+                if (board.get(row, col) == 0) {
+                    emptyCount++;
+                }
+            }
+        }
+        return emptyCount;
+    }
+
 
 }
 

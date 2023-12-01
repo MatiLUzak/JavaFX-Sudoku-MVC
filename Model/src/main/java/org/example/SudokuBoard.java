@@ -82,6 +82,19 @@ public class SudokuBoard implements Serializable,Cloneable {
         }
     }
 
+    public void removeFields(Difficulty difficulty) {
+        int fieldsToRemove = difficulty.getFieldsToRemove();
+        int removedFields = 0;
+        while (removedFields < fieldsToRemove) {
+            int x = (int) (Math.random() * GRID_SIZE);
+            int y = (int) (Math.random() * GRID_SIZE);
+            if (get(x, y) != 0) {
+                set(x, y, 0);
+                removedFields++;
+            }
+        }
+    }
+
     public int get(int x, int y) {
         return board[x][y].getValue();
     }
