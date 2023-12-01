@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class SudokuBoard implements Serializable {
+public class SudokuBoard implements Serializable,Cloneable {
 
     private SudokuSolver solver;
     public static final int GRID_SIZE = 9;
@@ -63,6 +63,23 @@ public class SudokuBoard implements Serializable {
                 .append(GRID_SIZE)
                 .append(board)
                 .toHashCode();
+    }
+
+    @Override
+    public SudokuBoard clone() {
+        try {
+            SudokuBoard cloned = (SudokuBoard) super.clone();
+            // cloned.solver = this.solver.clone();  tu nie wiem bo solver ma nie być clonable
+            cloned.board = new SudokuField[GRID_SIZE][GRID_SIZE];
+            for (int i = 0; i < GRID_SIZE; i++) {
+                for (int j = 0; j < GRID_SIZE; j++) {
+                    cloned.board[i][j] = this.board[i][j].clone();
+                }
+            }
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Class not cloneable", e);
+        }
     }
 
     public int get(int x, int y) {

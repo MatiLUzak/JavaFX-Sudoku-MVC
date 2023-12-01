@@ -4,9 +4,10 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SudokuStructure {
+public class SudokuStructure implements Cloneable {
     protected List<SudokuField> fields;
 
     public SudokuStructure(List<SudokuField> fields) {
@@ -55,6 +56,21 @@ public class SudokuStructure {
             seen[value - 1] = true;
         }
         return true;
+    }
+
+    @Override
+    public SudokuStructure clone() {
+        try {
+            SudokuStructure cloned = (SudokuStructure) super.clone();
+            cloned.fields = new ArrayList<>();
+            for (SudokuField field : this.fields) {
+                cloned.fields.add(field.clone()); // Zakładamy, że SudokuField implementuje Cloneable
+            }
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            // To wyjątek nie powinien wystąpić, ponieważ klasa implementuje Cloneable
+            throw new InternalError(e);
+        }
     }
 
 }

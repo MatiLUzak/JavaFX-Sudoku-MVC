@@ -76,7 +76,14 @@ class SudokuBoardTest {
 
         assertNotEquals(firstBoard.hashCode(), secondBoard.hashCode(), "Objects that are not equal should not have the same hash code.");
     }
+    @Test
+    void cloneTest() {
+        SudokuBoard originalBoard = new SudokuBoard(solver);
+        SudokuBoard clonedBoard = originalBoard.clone();
 
+        assertEquals(originalBoard,clonedBoard);
+        assertNotSame(originalBoard, clonedBoard, "Cloned structure should not be the same instance as the original structure.");
+    }
 
 
 

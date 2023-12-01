@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
 
-public class SudokuField implements Serializable {
+public class SudokuField implements Serializable,Cloneable, Comparable<SudokuField> {
 
     private static final long serialVersionUID = 1L;
     private int value;
@@ -45,6 +45,16 @@ public class SudokuField implements Serializable {
         return new HashCodeBuilder(17, 37)
                 .append(value)
                 .toHashCode();
+    }
+
+    @Override
+    public SudokuField clone() throws CloneNotSupportedException {
+        return (SudokuField) super.clone();
+    }
+
+    @Override
+    public int compareTo(SudokuField o) {
+        return Integer.compare(this.value, o.value);
     }
 }
 

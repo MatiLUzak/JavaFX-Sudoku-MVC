@@ -99,6 +99,15 @@ public class SudokuStructureTest {
         assertFalse(structure.equals(new Object()), "An object should not be equal to an object of a different class.");
     }
 
+    @Test
+    void cloneTest() {
+            SudokuStructure originalStructure = new SudokuStructure(fields);
+            SudokuStructure clonedStructure = originalStructure.clone();
+
+            assertEquals(originalStructure,clonedStructure);
+            assertNotSame(originalStructure, clonedStructure, "Cloned structure should not be the same instance as the original structure.");
+    }
+
 
     }
 
