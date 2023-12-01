@@ -76,4 +76,12 @@ public class SudokuFieldTest {
         assertTrue(field2.compareTo(field1) > 0, "field2 should be considered greater than field1.");
         assertEquals(0, field1.compareTo(field3), "field1 should be considered equal to field3.");
     }
+
+    @Test
+    void compareToWithNullShouldThrowNullPointerException() {
+        SudokuField field = new SudokuField();
+        field.setValue(5);
+
+        assertThrows(NullPointerException.class, () -> field.compareTo(null), "Comparing to null should throw NullPointerException.");
+    }
 }

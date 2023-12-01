@@ -57,4 +57,3 @@ public class SudokuField implements Serializable,Cloneable, Comparable<SudokuFie
         return Integer.compare(this.value, o.value);
     }
 }
-
