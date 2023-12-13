@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BoardViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.BoardViewController">
    <children>
       <GridPane fx:id="sudokuGrid" layoutX="50.0" layoutY="50.0" />
       <ComboBox fx:id="difficultyComboBox" layoutX="500.0" layoutY="500.0" prefWidth="150.0" />
