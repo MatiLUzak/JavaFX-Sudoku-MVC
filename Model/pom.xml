@@ -63,6 +63,7 @@
                 <version>3.3.0</version>
                 <configuration>
                     <configLocation>checkstyle2023.xml</configLocation>
+                    <excludes>**/module-info.java</excludes>
                 </configuration>
                 <executions>
                     <execution>
@@ -118,6 +119,7 @@
                     <inputEncoding>UTF-8</inputEncoding>
                     <consoleOutput>true</consoleOutput>
                     <linkXRef>false</linkXRef>
+                    <excludes>**/module-info.java</excludes>
                 </configuration>
                 <reportSets>
                     <reportSet>
