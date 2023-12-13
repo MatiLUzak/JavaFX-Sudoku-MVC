@@ -7,6 +7,6 @@
    <children>
       <GridPane fx:id="sudokuGrid" layoutX="50.0" layoutY="50.0" />
       <ComboBox fx:id="difficultyComboBox" layoutX="500.0" layoutY="500.0" prefWidth="150.0" />
-      <Button fx:id="startButton" layoutX="500.0" layoutY="550.0" mnemonicParsing="false" text="Button"/>
+      <Button fx:id="startButton" layoutX="500.0" layoutY="550.0" mnemonicParsing="false" text="Button" onAction="#onStartButtonClick"/>
    </children>
 </AnchorPane>

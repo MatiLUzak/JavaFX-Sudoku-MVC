@@ -10,9 +10,9 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/BoardView.fxml")); // Zaktualizuj ścieżkę
+        Parent root = FXMLLoader.load(getClass().getResource("/BoardView.fxml"));
         primaryStage.setScene(new Scene(root));
-        primaryStage.setTitle("Wybór poziomu trudności");
+        primaryStage.setTitle("Sudoku");
         primaryStage.show();
     }
 

@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.Node;
 
+import org.example.Difficulty;
 import org.example.SudokuBoard;
 import org.example.BacktrackingSudokuSolver;
 
@@ -44,14 +45,27 @@ public class BoardViewController {
     }
 
 
-   /* @FXML //Metody pod przyszłość tylko testowanie
+    @FXML
     private void onStartButtonClick() {
         String selectedDifficulty = difficultyComboBox.getValue();
-        if (selectedDifficulty != null) {
-            System.out.println("Wybrany poziom trudności: " + selectedDifficulty);
-            updateSudokuBoard();
+        Difficulty level = getDifficultyFromSelection(selectedDifficulty);
+        board.solveGame();
+        board.removeFields(level);
+        updateSudokuBoard();
+    }
+    private Difficulty getDifficultyFromSelection(String selection) {
+        switch (selection) {
+            case "Łatwy":
+                return Difficulty.EASY;
+            case "Średni":
+                return Difficulty.MEDIUM;
+            case "Trudny":
+                return Difficulty.HARD;
+            default:
+                return null;
         }
-    }*/
+    }
+
 
     private void updateSudokuBoard() {
         for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
