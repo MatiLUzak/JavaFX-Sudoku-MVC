@@ -261,20 +261,19 @@ class SudokuBoardTest {
     }
     @Test
     void testRemoveFields() {
-        // Ustawiamy planszę
         board.solveGame();
-        // Zapisujemy stan planszy przed usunięciem pól
+
         SudokuBoard originalBoard = board.clone();
 
-        // Usuwamy pola na poziomie EASY
+
         board.removeFields(Difficulty.EASY);
-        // Liczymy ile pól zostało usuniętych
+
         int emptyFields = countEmptyFields(board);
 
-        // Sprawdzamy czy liczba pustych pól zgadza się z oczekiwaną
+
         assertEquals(Difficulty.EASY.getFieldsToRemove(), emptyFields, "Liczba usuniętych pól nie zgadza się z poziomem trudności EASY.");
 
-        // Powtarzamy dla pozostałych poziomów trudności
+
         board = originalBoard.clone();
         board.removeFields(Difficulty.MEDIUM);
         emptyFields = countEmptyFields(board);

@@ -64,7 +64,7 @@ public class SudokuStructure implements Cloneable {
             SudokuStructure cloned = (SudokuStructure) super.clone();
             cloned.fields = new ArrayList<>();
             for (SudokuField field : this.fields) {
-                cloned.fields.add(field.clone()); // Zakładamy, że SudokuField implementuje Cloneable
+                cloned.fields.add(field.clone());
             }
             return cloned;
         } catch (CloneNotSupportedException e) {
