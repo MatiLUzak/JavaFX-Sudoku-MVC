@@ -82,7 +82,7 @@ public class SudokuBoard implements Serializable,Cloneable {
         }
     }
 
-    public void removeFields(Difficulty difficulty) {
+    /*public void removeFields(Difficulty difficulty) { //Stara logika
         int fieldsToRemove = difficulty.getFieldsToRemove();
         int removedFields = 0;
         while (removedFields < fieldsToRemove) {
@@ -93,7 +93,7 @@ public class SudokuBoard implements Serializable,Cloneable {
                 removedFields++;
             }
         }
-    }
+    }*/
 
     public int get(int x, int y) {
         return board[x][y].getValue();

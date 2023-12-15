@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.Node;
 
-import org.example.Difficulty;
 import org.example.SudokuBoard;
 import org.example.BacktrackingSudokuSolver;
 
@@ -50,7 +49,8 @@ public class BoardViewController {
         String selectedDifficulty = difficultyComboBox.getValue();
         Difficulty level = getDifficultyFromSelection(selectedDifficulty);
         board.solveGame();
-        board.removeFields(level);
+        //board.removeFields(level);
+        level.apply(board);
         updateSudokuBoard();
     }
     private Difficulty getDifficultyFromSelection(String selection) {

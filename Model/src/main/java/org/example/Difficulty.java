@@ -1,7 +1,7 @@
 package org.example;
 
-public enum Difficulty {
-    EASY(10), // Łatwy - usunięcie 10 pól
+/*public enum Difficulty {
+    EASY(10), // Łatwy - usunięcie 10 pól  //Stara logika
     MEDIUM(20), // Średni - usunięcie 20 pól
     HARD(30); // Trudny - usunięcie 30 pól
 
@@ -14,5 +14,5 @@ public enum Difficulty {
     public int getFieldsToRemove() {
         return fieldsToRemove;
     }
-}
+}*/
 
