@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.BoardViewController">
    <children>
-      <GridPane fx:id="sudokuGrid" layoutX="50.0" layoutY="50.0" />
-      <ComboBox fx:id="difficultyComboBox" layoutX="500.0" layoutY="500.0" prefWidth="150.0" />
-      <Button fx:id="startButton" layoutX="500.0" layoutY="550.0" mnemonicParsing="false" text="Start" onAction="#onStartButtonClick"/>
+      <GridPane fx:id="sudokuGrid" alignment="CENTER" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      </GridPane>
    </children>
+   <style>
+      .grid-cell {
+      -fx-font-size: 18;
+      -fx-font-weight: bold;
+      -fx-alignment: center;
+      -fx-border-color: black;
+      -fx-border-width: 0.5;
+      -fx-padding: 10;
+      }
+   </style>
+
 </AnchorPane>

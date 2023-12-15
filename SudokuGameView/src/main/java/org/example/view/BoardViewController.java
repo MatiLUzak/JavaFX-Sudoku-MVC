@@ -1,10 +1,10 @@
 package org.example.view;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.Node;
 
 import org.example.SudokuBoard;
@@ -14,55 +14,35 @@ public class BoardViewController {
 
     @FXML
     private GridPane sudokuGrid;
-    @FXML
-    private ComboBox<String> difficultyComboBox;
-    @FXML
-    private Button startButton;
 
     private SudokuBoard board;
 
     @FXML
-    private void initialize() {
-        difficultyComboBox.getItems().addAll("Łatwy", "Średni", "Trudny");
-        difficultyComboBox.setValue("Łatwy");
+    public void initializeBoard(Difficulty difficulty) {
         initializeSudokuGrid();
         board = new SudokuBoard(new BacktrackingSudokuSolver());
         board.solveGame();
+        difficulty.apply(board);
         updateSudokuBoard();
     }
 
     private void initializeSudokuGrid() {
         sudokuGrid.getChildren().clear();
+
+        final int size = 40;
+        final int thickBorder = 3;
+        final String borderColor = "black";
+
         for (int i = 0; i < SudokuBoard.GRID_SIZE; i++) {
             for (int j = 0; j < SudokuBoard.GRID_SIZE; j++) {
                 TextField textField = new TextField();
-                textField.setPrefHeight(40);
-                textField.setPrefWidth(40);
+                textField.getStyleClass().add("grid-cell");
+                textField.setPrefHeight(size);
+                textField.setPrefWidth(size);
+                textField.setAlignment(Pos.CENTER);
                 sudokuGrid.add(textField, j, i);
+                GridPane.setMargin(textField, new Insets(1));
             }
-        }
-    }
-
-
-    @FXML
-    private void onStartButtonClick() {
-        String selectedDifficulty = difficultyComboBox.getValue();
-        Difficulty level = getDifficultyFromSelection(selectedDifficulty);
-        board.solveGame();
-        //board.removeFields(level);
-        level.apply(board);
-        updateSudokuBoard();
-    }
-    private Difficulty getDifficultyFromSelection(String selection) {
-        switch (selection) {
-            case "Łatwy":
-                return Difficulty.EASY;
-            case "Średni":
-                return Difficulty.MEDIUM;
-            case "Trudny":
-                return Difficulty.HARD;
-            default:
-                return null;
         }
     }
 
