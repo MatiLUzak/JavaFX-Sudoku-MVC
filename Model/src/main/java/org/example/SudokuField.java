@@ -56,4 +56,12 @@ public class SudokuField implements Serializable,Cloneable, Comparable<SudokuFie
     public int compareTo(SudokuField o) {
         return Integer.compare(this.value, o.value);
     }
+
+    public String getStringValue() {
+        return value == 0 ? "" : String.valueOf(value);
+    }
+
+    public void setStringValue(String value) {
+        this.value = value.isEmpty() ? 0 : Integer.parseInt(value);
+    }
 }

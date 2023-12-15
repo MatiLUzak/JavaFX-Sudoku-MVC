@@ -162,5 +162,14 @@ public class SudokuBoard implements Serializable,Cloneable {
         }
         return true;
     }
+    public void printBoard() {
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
+                System.out.print(board[i][j].getValue() + " ");
+            }
+            System.out.println();
+        }
+    }
+
 
 }
