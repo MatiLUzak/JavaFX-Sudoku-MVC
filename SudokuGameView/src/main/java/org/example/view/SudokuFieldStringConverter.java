@@ -1,4 +1,4 @@
-package org.example.view;
+/*package org.example.view;
 
 import javafx.util.StringConverter;
 
@@ -17,5 +17,5 @@ public class SudokuFieldStringConverter extends StringConverter<String> {
             return string; // Bez zmian
         }
     }
-}
+}*/
 

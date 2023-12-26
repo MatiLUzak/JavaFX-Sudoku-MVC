@@ -105,7 +105,7 @@ public class BoardViewController {
         // Dwustronne wiązanie wartości pola tekstowego z właściwością stringValue adaptera
         textFormatter.valueProperty().bindBidirectional(adapter.stringValueProperty());
 
-        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+        /*textField.textProperty().addListener((observable, oldValue, newValue) -> {
             // Konwersja tekstu na liczbę i aktualizacja SudokuBoard
             try {
                 int intValue = newValue.trim().isEmpty() ? 0 : Integer.parseInt(newValue.trim());
@@ -116,7 +116,7 @@ public class BoardViewController {
                 // Obsługa sytuacji, gdy wprowadzony tekst nie jest liczbą
                 System.out.println("Wprowadzono nieprawidłową wartość: " + newValue);
             }
-        });
+        });*/
 
         return textField;
     }
