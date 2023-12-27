@@ -11,6 +11,7 @@
       <Button fx:id="saveButton" layoutX="400.0" layoutY="500.0" onAction="#saveGame" text="Save" />
       <Button fx:id="loadButton" layoutX="500.0" layoutY="500.0" onAction="#loadGame" text="Load" />
       <Button fx:id="backButton" layoutX="300.0" layoutY="500.0" onAction="#handleBackAction" text="Return" />
+      <Label fx:id="authorsLabel" layoutX="10.0" layoutY="10.0" text="%authors" />
    </children>
    <style>
       .grid-cell {
