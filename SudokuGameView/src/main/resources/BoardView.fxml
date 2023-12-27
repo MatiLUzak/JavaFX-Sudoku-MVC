@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.view.BoardViewController">
    <children>
-      <GridPane fx:id="sudokuGrid" alignment="CENTER" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      
+      <GridPane fx:id="sudokuGrid" alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       </GridPane>
+      <Button fx:id="saveButton" layoutX="400.0" layoutY="500.0" onAction="#saveGame" text="Save" />
+      <Button fx:id="loadButton" layoutX="500.0" layoutY="500.0" onAction="#loadGame" text="Load" />
+      <Button fx:id="backButton" layoutX="300.0" layoutY="500.0" onAction="#handleBackAction" text="Return" />
    </children>
    <style>
       .grid-cell {

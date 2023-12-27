@@ -18,7 +18,7 @@ public class MainApp extends Application {
         showDifficultySelectionScene();
 
     }
-    private void showDifficultySelectionScene() throws IOException {
+    public void showDifficultySelectionScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu.fxml"));
         Parent difficultySelectionRoot = loader.load();
 
@@ -38,6 +38,7 @@ public class MainApp extends Application {
 
         // Przekazanie wybranego poziomu trudności do kontrolera planszy Sudoku
         BoardViewController controller = loader.getController();
+        controller.setMainApp(this);
         controller.initializeBoard(difficulty);
 
         Scene sudokuBoardScene = new Scene(sudokuBoardRoot);

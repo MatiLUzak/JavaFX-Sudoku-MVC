@@ -10,17 +10,29 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Node;
 
+import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
+import org.example.Dao;
 import org.example.SudokuBoard;
 import org.example.BacktrackingSudokuSolver;
+import org.example.SudokuBoardDaoFactory;
+
+import java.io.File;
+import java.io.IOException;
 
 public class BoardViewController {
 
     @FXML
     private GridPane sudokuGrid;
 
-    private SudokuBoard board= new SudokuBoard(new BacktrackingSudokuSolver());;
+    private SudokuBoard board= new SudokuBoard(new BacktrackingSudokuSolver());
+
+    private MainApp mainApp;
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
 
     @FXML
     public void initializeBoard(Difficulty difficulty) {
@@ -121,5 +133,45 @@ public class BoardViewController {
         return textField;
     }
 
+    @FXML
+    private void saveGame(){
+        FileChooser fileChooser=new FileChooser();
+        File file =fileChooser.showSaveDialog(null);
+
+        if(file!=null){
+            try {
+                Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao(file.getPath());
+                dao.write(board);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+    @FXML
+    private void loadGame(){
+        FileChooser fileChooser = new FileChooser();
+
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            try {
+                Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao(file.getPath());
+                SudokuBoard loadedBoard = dao.read();
+                board = loadedBoard;
+                updateSudokuBoard();
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+    @FXML
+    private void handleBackAction(){
+        try {
+            mainApp.showDifficultySelectionScene();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

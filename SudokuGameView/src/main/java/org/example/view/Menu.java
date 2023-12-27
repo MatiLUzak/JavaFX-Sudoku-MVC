@@ -14,7 +14,7 @@ public class Menu {
     }
 
     @FXML
-    private void handleEasyAction(ActionEvent event) {
+    private void handleEasyAction() {
         try {
             mainApp.showSudokuBoardScene(Difficulty.EASY);
         } catch (IOException e) {
@@ -23,7 +23,7 @@ public class Menu {
     }
 
     @FXML
-    private void handleMediumAction(ActionEvent event) {
+    private void handleMediumAction() {
         try {
             mainApp.showSudokuBoardScene(Difficulty.MEDIUM);
         } catch (IOException e) {
@@ -32,7 +32,7 @@ public class Menu {
     }
 
     @FXML
-    private void handleHardAction(ActionEvent event) {
+    private void handleHardAction() {
         try {
             mainApp.showSudokuBoardScene(Difficulty.HARD);
         } catch (IOException e) {
