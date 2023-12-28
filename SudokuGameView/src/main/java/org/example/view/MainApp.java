@@ -21,10 +21,10 @@ public class MainApp extends Application {
 
     }
     public void showDifficultySelectionScene() throws IOException {
-        ResourceBundle authorsBundle = ResourceBundle.getBundle("org.example.view.AuthorsResource_en");
+        //ResourceBundle authorsBundle = ResourceBundle.getBundle("org.example.view.AuthorsResource_en");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu.fxml"));
-       // ResourceBundle bundle = ResourceBundle.getBundle("Messages", Locale.getDefault());
-        loader.setResources(authorsBundle); // Set the ResourceBundle for the loader
+        ResourceBundle bundle = ResourceBundle.getBundle("Messages", Locale.getDefault());
+        loader.setResources(bundle); // Set the ResourceBundle for the loader
         Parent difficultySelectionRoot = loader.load();
 
         Menu controller = loader.getController();

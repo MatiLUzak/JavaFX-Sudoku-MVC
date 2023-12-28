@@ -8,10 +8,9 @@
       
       <GridPane fx:id="sudokuGrid" alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       </GridPane>
-      <Button fx:id="saveButton" layoutX="400.0" layoutY="500.0" onAction="#saveGame" text="Save" />
-      <Button fx:id="loadButton" layoutX="500.0" layoutY="500.0" onAction="#loadGame" text="Load" />
-      <Button fx:id="backButton" layoutX="300.0" layoutY="500.0" onAction="#handleBackAction" text="Return" />
-      <Label fx:id="authorsLabel" layoutX="10.0" layoutY="10.0" text="%authors" />
+      <Button fx:id="saveButton" layoutX="400.0" layoutY="500.0" onAction="#saveGame" text="%save" />
+      <Button fx:id="loadButton" layoutX="500.0" layoutY="500.0" onAction="#loadGame" text="%load" />
+      <Button fx:id="backButton" layoutX="300.0" layoutY="500.0" onAction="#handleBackAction" text="%return" />
    </children>
    <style>
       .grid-cell {
