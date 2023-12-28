@@ -14,6 +14,9 @@ public class MainApp extends Application {
 
     private  Stage primaryStage;
 
+    private static Locale currentLocale = Locale.getDefault();
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage=primaryStage;

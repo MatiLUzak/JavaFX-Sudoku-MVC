@@ -1,6 +1,5 @@
 package org.example.view;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,28 +57,27 @@ public class Menu {
     private void handleLanguageChange() throws IOException {
         Locale selectedLocale = languageComboBox.getValue().equals("Polski") ? new Locale("pl", "PL") : new Locale("en", "US");
 
-
-        ResourceBundle bundle = ResourceBundle.getBundle("Messages", selectedLocale);
-
+        // Zaktualizuj ResourceBundle do nowego języka
+        ResourceBundle mainBundle = ResourceBundle.getBundle("Messages", selectedLocale);
         ResourceBundle authorsBundle = ResourceBundle.getBundle("org.example.view.AuthorsResource", selectedLocale);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu.fxml"), bundle);
+        // Przeładuj widok z nowym ResourceBundle
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu.fxml"), mainBundle);
         Parent root = loader.load();
 
-
+        // Ustawienie referencji MainApp dla nowego kontrolera
         Menu controller = loader.getController();
         controller.setMainApp(this.mainApp);
 
-
+        // Ustawienie nowego widoku w scenie
         Scene scene = languageComboBox.getScene();
         scene.setRoot(root);
 
+        // Zaktualizuj etykietę z informacjami o autorach
         String authorsKey = selectedLocale.getLanguage().equals("pl") ? "autorzy" : "authors";
         String authorsText = authorsBundle.getString(authorsKey);
         controller.authorsLabel.setText(authorsText); // Ustawienie tekstu etykiety
     }
 
-
 }
-
 
