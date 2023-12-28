@@ -1,11 +1,12 @@
-package resources;
+package org.example.view;
 
 import java.util.ListResourceBundle;
-public class AuthorsResource_pl extends ListResourceBundle{
+public class AuthorsResource_en extends ListResourceBundle{
     @Override
     protected Object[][] getContents() {
         return new Object[][] {
-                {"autorzy","Autor 1", "Autor 2"}
+                {"authors", "Autor 1", "Autor 2"}
         };
     }
+
 }
