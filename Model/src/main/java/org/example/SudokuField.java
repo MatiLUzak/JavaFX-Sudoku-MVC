@@ -3,11 +3,14 @@ package org.example;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 
 public class SudokuField implements Serializable,Cloneable, Comparable<SudokuField> {
 
+    private static final Logger logger = LogManager.getLogger(SudokuField.class);
     private static final long serialVersionUID = 1L;
     private int value;
 
@@ -16,6 +19,7 @@ public class SudokuField implements Serializable,Cloneable, Comparable<SudokuFie
     }
 
     public void setValue(int value) {
+        logger.debug("Setting SudokuField value to: " + value);
         this.value = value;
     }
 

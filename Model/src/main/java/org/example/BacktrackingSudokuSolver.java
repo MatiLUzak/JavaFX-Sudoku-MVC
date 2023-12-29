@@ -1,9 +1,10 @@
 package org.example;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public class BacktrackingSudokuSolver implements SudokuSolver,Serializable {
     public static final int GRID_SIZE = 9;
 
     private static final List<Integer> LIST = new ArrayList<>();
+
+    private static final Logger logger = LogManager.getLogger(BacktrackingSudokuSolver.class);
 
     static {
         for (int i = 1; i <= GRID_SIZE; i++) {
@@ -102,6 +105,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver,Serializable {
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int column = 0; column < GRID_SIZE; column++) {
                 if (board.get(row, column) == 0) {
+                    logger.debug("Attempting to sort board at row: " + row + ", column: " + column);
                     for (Integer numberToTry : LIST) {
                         if (isValid(board, numberToTry, column, row)) {
                             board.set(row, column, numberToTry);
