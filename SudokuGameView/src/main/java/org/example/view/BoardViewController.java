@@ -5,6 +5,7 @@ import javafx.beans.property.adapter.JavaBeanStringPropertyBuilder;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
@@ -17,6 +18,7 @@ import org.example.Dao;
 import org.example.SudokuBoard;
 import org.example.BacktrackingSudokuSolver;
 import org.example.SudokuBoardDaoFactory;
+import org.example.exceptions.SudokuException;
 
 import java.io.File;
 import java.io.IOException;
@@ -134,24 +136,23 @@ public class BoardViewController {
     }
 
     @FXML
-    private void saveGame(){
-        FileChooser fileChooser=new FileChooser();
-        File file =fileChooser.showSaveDialog(null);
+    private void saveGame() {
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showSaveDialog(null);
 
-        if(file!=null){
+        if (file != null) {
             try {
                 Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao(file.getPath());
                 dao.write(board);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } catch (SudokuException e) {
+                showAlert("Error", "Cannot save the game: " + e.getMessage());
             }
         }
-
     }
-    @FXML
-    private void loadGame(){
-        FileChooser fileChooser = new FileChooser();
 
+    @FXML
+    private void loadGame() {
+        FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
             try {
@@ -159,12 +160,20 @@ public class BoardViewController {
                 SudokuBoard loadedBoard = dao.read();
                 board = loadedBoard;
                 updateSudokuBoard();
-            } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            } catch (SudokuException e) {
+                showAlert("Error", "Cannot load the game: " + e.getMessage());
             }
         }
-
     }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     @FXML
     private void handleBackAction(){
         try {

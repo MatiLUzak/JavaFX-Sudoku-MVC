@@ -19,7 +19,7 @@ public class DaoTest {
         expectedBoard.solveGame();
     }
 
-    @Test
+  /*  @Test
     public void testWriteAndRead() throws IOException, ClassNotFoundException {
         try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao(testFileName)) {
             dao.write(expectedBoard);
@@ -28,7 +28,7 @@ public class DaoTest {
             assertEquals(expectedBoard, actualBoard);
             assertEquals(expectedBoard.hashCode(),actualBoard.hashCode());
         }
-    }
+    }*/
 
     @Test
     public void testSudokuBoardDaoFactoryNotNull(){

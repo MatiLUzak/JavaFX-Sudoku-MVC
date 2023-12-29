@@ -1,13 +1,13 @@
 package org.example;
 
-import java.io.IOException;
+import org.example.exceptions.SudokuException;
 
 public interface Dao<T> extends AutoCloseable {
 
-    T read() throws IOException, ClassNotFoundException;
+    T read() throws SudokuException;
 
-    void write(T obj) throws IOException;
+    void write(T obj) throws SudokuException;
 
     @Override
-    void close() throws IOException;
+    void close() throws SudokuException;
 }
