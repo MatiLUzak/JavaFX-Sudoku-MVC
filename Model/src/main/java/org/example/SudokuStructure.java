@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.exceptions.InvalidSudokuBoardException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class SudokuStructure implements Cloneable {
 
     public SudokuStructure(List<SudokuField> fields) {
         if (fields == null) {
-            throw new IllegalArgumentException("Fields array cannot be null");
+            throw new InvalidSudokuBoardException("Fields array cannot be null");
         }
         this.fields = fields;
     }
@@ -76,8 +77,9 @@ public class SudokuStructure implements Cloneable {
             return cloned;
         } catch (CloneNotSupportedException e) {
             logger.error("CloneNotSupportedException in SudokuStructure", e);
-            throw new InternalError(e);
+            throw new InvalidSudokuBoardException("sudokuStructure.cloneNotSupported", e);
         }
     }
+
 
 }

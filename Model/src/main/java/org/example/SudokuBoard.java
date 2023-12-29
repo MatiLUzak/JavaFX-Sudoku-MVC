@@ -3,6 +3,7 @@ package org.example;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.example.exceptions.InvalidSudokuBoardException;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -20,7 +21,7 @@ public class SudokuBoard implements Serializable,Cloneable {
 
     public SudokuBoard(SudokuSolver solver) {
         if (solver == null) {
-            throw new IllegalArgumentException("Solver cannot be null");
+            throw new InvalidSudokuBoardException("Solver cannot be null");
         }
         this.solver = solver;
         board = new SudokuField[GRID_SIZE][GRID_SIZE];
@@ -78,7 +79,7 @@ public class SudokuBoard implements Serializable,Cloneable {
             }
             return cloned;
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Class not cloneable", e);
+            throw new InvalidSudokuBoardException("Class not cloneable", e);
         }
     }
 
@@ -109,7 +110,7 @@ public class SudokuBoard implements Serializable,Cloneable {
 
     public SudokuRow getRow(int y) {
         if (y < 0 || y >= GRID_SIZE) {
-            throw new IllegalArgumentException("Row index out of bounds");
+            throw new InvalidSudokuBoardException("Row index out of bounds");
         }
         SudokuField[] rowArray = new SudokuField[GRID_SIZE];
         for (int i = 0; i < GRID_SIZE; i++) {
@@ -121,7 +122,7 @@ public class SudokuBoard implements Serializable,Cloneable {
 
     public SudokuColumn getColumn(int x) {
         if (x < 0 || x >= GRID_SIZE) {
-            throw new IllegalArgumentException("Column index out of bounds");
+            throw new InvalidSudokuBoardException("Column index out of bounds");
         }
         SudokuField[] columnArray = new SudokuField[GRID_SIZE];
         for (int i = 0; i < GRID_SIZE; i++) {
@@ -133,7 +134,7 @@ public class SudokuBoard implements Serializable,Cloneable {
 
     public SudokuBox getBox(int row, int col) {
         if (row < 0 || row > GRID_SIZE - 3 || col < 0 || col > GRID_SIZE - 3) {
-            throw new IllegalArgumentException("Box index out of bounds");
+            throw new InvalidSudokuBoardException("Box index out of bounds");
         }
         SudokuField[] boxRowArray = new SudokuField[GRID_SIZE];
         int x = 0;
