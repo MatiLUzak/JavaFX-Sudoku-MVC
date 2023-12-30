@@ -4,12 +4,11 @@ import java.util.ResourceBundle;
 import java.util.Locale;
 
 public class SudokuException extends RuntimeException {
-    public SudokuException(String messageKey, Object... args) {
-        super(String.format(ResourceBundle.getBundle("messages", Locale.getDefault()).getString(messageKey), args));
+    public SudokuException(String messageKey) {
+        super(ResourceBundle.getBundle("messages", Locale.getDefault()).getString(messageKey));
     }
 
-    public SudokuException(String message, Throwable cause) {
-
-        super(message, cause);
+    public SudokuException(String messageKey, Throwable cause) {
+        super(ResourceBundle.getBundle("messages", Locale.getDefault()).getString(messageKey), cause);
     }
 }

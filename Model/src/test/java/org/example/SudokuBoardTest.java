@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.exceptions.InvalidSudokuBoardException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,11 +17,11 @@ class SudokuBoardTest {
     }
     @Test
     void testConstructorThrowException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(InvalidSudokuBoardException.class, () -> {
             new SudokuBoard(null);
         });
 
-        String expectedMessage = "Solver cannot be null";
+        String expectedMessage = "Solver nie moze byc null";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -143,10 +144,10 @@ class SudokuBoardTest {
 
     @Test
     public void testGetRowOutOfBounds() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(InvalidSudokuBoardException.class, () -> {
             board.getRow(-1);
         });
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(InvalidSudokuBoardException.class, () -> {
             board.getRow(9);
         });
     }
@@ -161,10 +162,10 @@ class SudokuBoardTest {
 
     @Test
     public void testGetColumnOutOfBounds() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(InvalidSudokuBoardException.class, () -> {
             board.getColumn(-1);
         });
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(InvalidSudokuBoardException.class, () -> {
             board.getColumn(9);
         });
     }
@@ -180,21 +181,21 @@ class SudokuBoardTest {
     @Test
     public void testGetBoxOutOfBounds() {
 
-        assertThrows(IllegalArgumentException.class, () -> board.getBox(-1, 0));
-        assertThrows(IllegalArgumentException.class, () -> board.getBox(0, -1));
+        assertThrows(InvalidSudokuBoardException.class, () -> board.getBox(-1, 0));
+        assertThrows(InvalidSudokuBoardException.class, () -> board.getBox(0, -1));
 
-        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE - 2, SudokuBoard.GRID_SIZE));
-        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, SudokuBoard.GRID_SIZE - 2));
+        assertThrows(InvalidSudokuBoardException.class, () -> board.getBox(SudokuBoard.GRID_SIZE - 2, SudokuBoard.GRID_SIZE));
+        assertThrows(InvalidSudokuBoardException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, SudokuBoard.GRID_SIZE - 2));
 
-        assertThrows(IllegalArgumentException.class, () -> board.getBox(-1, -1));
-        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, SudokuBoard.GRID_SIZE));
+        assertThrows(InvalidSudokuBoardException.class, () -> board.getBox(-1, -1));
+        assertThrows(InvalidSudokuBoardException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, SudokuBoard.GRID_SIZE));
 
-        assertThrows(IllegalArgumentException.class, () -> board.getBox(-1, SudokuBoard.GRID_SIZE));
-        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, -1));
+        assertThrows(InvalidSudokuBoardException.class, () -> board.getBox(-1, SudokuBoard.GRID_SIZE));
+        assertThrows(InvalidSudokuBoardException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, -1));
 
-        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE - 2, SudokuBoard.GRID_SIZE - 2));
-        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, SudokuBoard.GRID_SIZE - 3));
-        assertThrows(IllegalArgumentException.class, () -> board.getBox(SudokuBoard.GRID_SIZE - 3, SudokuBoard.GRID_SIZE));
+        assertThrows(InvalidSudokuBoardException.class, () -> board.getBox(SudokuBoard.GRID_SIZE - 2, SudokuBoard.GRID_SIZE - 2));
+        assertThrows(InvalidSudokuBoardException.class, () -> board.getBox(SudokuBoard.GRID_SIZE, SudokuBoard.GRID_SIZE - 3));
+        assertThrows(InvalidSudokuBoardException.class, () -> board.getBox(SudokuBoard.GRID_SIZE - 3, SudokuBoard.GRID_SIZE));
     }
     @Test
     void checkBoard() {
@@ -259,43 +260,6 @@ class SudokuBoardTest {
         }
         return true;
     }
-    /*@Test
-    void testRemoveFields() {
-        board.solveGame();
-
-        SudokuBoard originalBoard = board.clone();
-
-
-        board.removeFields(Difficulty.EASY);
-
-        int emptyFields = countEmptyFields(board);
-
-
-        assertEquals(Difficulty.EASY.getFieldsToRemove(), emptyFields, "Liczba usuniętych pól nie zgadza się z poziomem trudności EASY.");
-
-
-        board = originalBoard.clone();
-        board.removeFields(Difficulty.MEDIUM);
-        emptyFields = countEmptyFields(board);
-        assertEquals(Difficulty.MEDIUM.getFieldsToRemove(), emptyFields, "Liczba usuniętych pól nie zgadza się z poziomem trudności MEDIUM.");
-
-        board = originalBoard.clone();
-        board.removeFields(Difficulty.HARD);
-        emptyFields = countEmptyFields(board);
-        assertEquals(Difficulty.HARD.getFieldsToRemove(), emptyFields, "Liczba usuniętych pól nie zgadza się z poziomem trudności HARD.");
-    }
-
-    private int countEmptyFields(SudokuBoard board) {
-        int emptyCount = 0;
-        for (int row = 0; row < SudokuBoard.GRID_SIZE; row++) {
-            for (int col = 0; col < SudokuBoard.GRID_SIZE; col++) {
-                if (board.get(row, col) == 0) {
-                    emptyCount++;
-                }
-            }
-        }
-        return emptyCount;
-    }*/
 
 
 }

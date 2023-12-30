@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.exceptions.InvalidSudokuBoardException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +23,7 @@ public class SudokuStructureTest {
         }
         @Test
         void constructorShouldThrowExceptionForNullArray() {
-            assertThrows(IllegalArgumentException.class, () -> new SudokuBox(null));
+            assertThrows(InvalidSudokuBoardException.class, () -> new SudokuBox(null));
         }
         @Test
         void TestVerifyBOXSeenNumbers() {

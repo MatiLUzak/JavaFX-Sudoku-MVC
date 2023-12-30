@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.exceptions.SudokuIOException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,16 +20,16 @@ public class DaoTest {
         expectedBoard.solveGame();
     }
 
-  /*  @Test
-    public void testWriteAndRead() throws IOException, ClassNotFoundException {
+    @Test
+    public void testWriteAndRead() throws SudokuIOException {
         try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao(testFileName)) {
             dao.write(expectedBoard);
             SudokuBoard actualBoard = dao.read();
 
             assertEquals(expectedBoard, actualBoard);
-            assertEquals(expectedBoard.hashCode(),actualBoard.hashCode());
+            assertEquals(expectedBoard.hashCode(), actualBoard.hashCode());
         }
-    }*/
+    }
 
     @Test
     public void testSudokuBoardDaoFactoryNotNull(){

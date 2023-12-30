@@ -3,7 +3,7 @@ package org.example.exceptions;
 import java.io.IOException;
 
 public class SudokuIOException extends SudokuException {
-    public SudokuIOException(String message, IOException cause) {
-        super(message, cause);
+    public SudokuIOException(String messageKey, IOException cause) {
+        super(messageKey, cause);
     }
 }

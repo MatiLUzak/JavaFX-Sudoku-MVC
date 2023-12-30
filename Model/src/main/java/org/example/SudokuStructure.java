@@ -17,7 +17,7 @@ public class SudokuStructure implements Cloneable {
 
     public SudokuStructure(List<SudokuField> fields) {
         if (fields == null) {
-            throw new InvalidSudokuBoardException("Fields array cannot be null");
+            throw new InvalidSudokuBoardException("FieldsArrayCannotBeNull");
         }
         this.fields = fields;
     }
@@ -77,7 +77,7 @@ public class SudokuStructure implements Cloneable {
             return cloned;
         } catch (CloneNotSupportedException e) {
             logger.error("CloneNotSupportedException in SudokuStructure", e);
-            throw new InvalidSudokuBoardException("sudokuStructure.cloneNotSupported", e);
+            throw new InvalidSudokuBoardException("SudokuStructureCloneNotSupported", e);
         }
     }
 

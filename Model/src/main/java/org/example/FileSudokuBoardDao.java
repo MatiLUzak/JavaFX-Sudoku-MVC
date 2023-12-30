@@ -18,15 +18,13 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
     public SudokuBoard read() throws SudokuException {
         logger.info("Reading SudokuBoard from file: " + fileName);
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
-            SudokuBoard board = (SudokuBoard) inputStream.readObject();
-            logger.debug("SudokuBoard read successfully from file: " + fileName);
-            return board;
+            return (SudokuBoard) inputStream.readObject();
         } catch (IOException e) {
             logger.error("Error reading SudokuBoard from file: " + fileName, e);
-            throw new SudokuIOException("Error reading from file", e);
+            throw new SudokuIOException("ioException", e);
         } catch (ClassNotFoundException e) {
             logger.error("Class not found when reading SudokuBoard from file: " + fileName, e);
-            throw new SudokuException("Class not found", e);
+            throw new SudokuException("classNotFoundException", e);
         }
     }
 
@@ -35,16 +33,15 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard> {
         logger.info("Writing SudokuBoard to file: " + fileName);
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
             outputStream.writeObject(obj);
-            logger.debug("SudokuBoard written successfully to file: " + fileName);
         } catch (IOException e) {
             logger.error("Error writing SudokuBoard to file: " + fileName, e);
-            throw new SudokuIOException("Error writing to file", e);
+            throw new SudokuIOException("ioException", e);
         }
     }
 
     @Override
     public void close() throws SudokuIOException {
         logger.debug("Closing FileSudokuBoardDao for file: " + fileName);
-
+        // Tutaj nie ma specjalnych operacji do zamknięcia, ale logika zamykania może być dodana później.
     }
 }

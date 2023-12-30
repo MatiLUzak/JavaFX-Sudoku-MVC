@@ -1,11 +1,11 @@
 package org.example.exceptions;
 
 public class InvalidSudokuBoardException extends SudokuException {
-    public InvalidSudokuBoardException(String message) {
-        super(message);
+    public InvalidSudokuBoardException(String messageKey) {
+        super(messageKey);
     }
 
-    public InvalidSudokuBoardException(String message, Throwable cause) {
-        super(message, cause);
+    public InvalidSudokuBoardException(String messageKey, Throwable cause) {
+        super(messageKey, cause);
     }
 }
