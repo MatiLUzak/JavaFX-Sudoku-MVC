@@ -16,6 +16,15 @@ public class MainApp extends Application {
 
     private static Locale currentLocale = Locale.getDefault();
 
+    public static void setCurrentLocale(Locale locale) {
+        currentLocale = locale;
+    }
+
+    public static Locale getCurrentLocale() {
+        return currentLocale;
+    }
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -42,7 +51,7 @@ public class MainApp extends Application {
 
     public void showSudokuBoardScene(Difficulty difficulty) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/BoardView.fxml"));
-        ResourceBundle bundle = ResourceBundle.getBundle("Messages", Locale.getDefault());
+        ResourceBundle bundle = ResourceBundle.getBundle("Messages", MainApp.getCurrentLocale());
         loader.setResources(bundle); // Set the ResourceBundle for the loader
         Parent sudokuBoardRoot = loader.load();
 
