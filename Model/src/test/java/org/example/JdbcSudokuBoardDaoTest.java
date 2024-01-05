@@ -37,7 +37,7 @@ public class JdbcSudokuBoardDaoTest {
 
             assertNotNull(actualBoard);
             assertEquals(expectedBoard, actualBoard);
-            assertEquals(expectedBoard.hashCode(), actualBoard.hashCode()); //zxcxczczxczxxcc
+            assertEquals(expectedBoard.hashCode(), actualBoard.hashCode());
         }
     }
 
