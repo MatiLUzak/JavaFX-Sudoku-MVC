@@ -11,4 +11,7 @@ public class SudokuBoardDaoFactory {
         logger.debug("Creating FileSudokuBoardDao for file: " + fileName);
         return new FileSudokuBoardDao(fileName);
     }
+    public static Dao<SudokuBoard> getJdbcDao(String boardName) {
+        return new JdbcSudokuBoardDao(boardName);
+    }
 }
