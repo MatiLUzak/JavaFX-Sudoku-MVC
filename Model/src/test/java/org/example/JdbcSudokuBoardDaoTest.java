@@ -5,10 +5,8 @@ import org.example.exceptions.SudokuException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.util.ResourceBundle;
+import java.io.File;
+import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,15 +16,16 @@ public class JdbcSudokuBoardDaoTest {
     private SudokuBoard expectedBoard;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
+        File dbFile = new File("sudoku.db");
+        if (dbFile.exists()) {
+            dbFile.delete();
+        }
+
+        DatabaseInitializer.createNewDatabase();
+
         expectedBoard = new SudokuBoard(new BacktrackingSudokuSolver());
         expectedBoard.solveGame();
-
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:sudoku.db");
-             Statement stmt = conn.createStatement()) {
-            stmt.execute("DELETE FROM boards WHERE name = '" + testBoardName + "'");
-            stmt.execute("DELETE FROM fields WHERE board_id IN (SELECT board_id FROM boards WHERE name = '" + testBoardName + "')");
-        }
     }
 
     @Test
@@ -48,13 +47,32 @@ public class JdbcSudokuBoardDaoTest {
         }
     }
 
+    @Test
+    public void testWriteAndReadTransaction() throws SudokuException {
+        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getJdbcDao(testBoardName)) {
+            dao.write(expectedBoard);
+        } catch (SudokuDatabaseException e) {
+            fail("Nie powinno być wyjątku podczas zapisu: " + e.getMessage());
+        }
+
+        SudokuBoard actualBoard = null;
+        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getJdbcDao(testBoardName)) {
+            actualBoard = dao.read();
+        } catch (SudokuDatabaseException e) {
+            fail("Nie powinno być wyjątku podczas odczytu: " + e.getMessage());
+        }
+
+        assertNotNull(actualBoard, "Odczytana plansza nie powinna być null.");
+        assertEquals(expectedBoard, actualBoard, "Odczytana plansza powinna być równa zapisanej.");
+    }
+
+
 
     @AfterEach
-    public void tearDown() throws Exception {
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:sudoku.db");
-             Statement stmt = conn.createStatement()) {
-            stmt.execute("DELETE FROM boards WHERE name = '" + testBoardName + "'");
-            stmt.execute("DELETE FROM fields WHERE board_id IN (SELECT board_id FROM boards WHERE name = '" + testBoardName + "')");
+    public void tearDown() {
+        File dbFile = new File("sudoku.db");
+        if (dbFile.exists()) {
+            dbFile.delete();
         }
     }
 }

@@ -51,13 +51,9 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
 
     @Override
     public void write(SudokuBoard obj) throws SudokuException {
-        Connection conn = null;
-        try {
-            conn = DatabaseConnector.getConnection();
-            PreparedStatement insertBoard = conn.prepareStatement(
-                    "INSERT INTO boards (name) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement insertField = conn.prepareStatement(
-                    "INSERT INTO fields (board_id, x, y, value) VALUES (?, ?, ?, ?)");
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement insertBoard = conn.prepareStatement(
+                     "INSERT INTO boards (name) VALUES (?)", Statement.RETURN_GENERATED_KEYS)) {
 
             conn.setAutoCommit(false);
 
@@ -77,37 +73,26 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard> {
                 }
             }
 
-            for (int x = 0; x < SudokuBoard.GRID_SIZE; x++) {
-                for (int y = 0; y < SudokuBoard.GRID_SIZE; y++) {
-                    insertField.setLong(1, boardId);
-                    insertField.setInt(2, x);
-                    insertField.setInt(3, y);
-                    insertField.setInt(4, obj.get(x, y));
-                    insertField.executeUpdate();
+            try (PreparedStatement insertField = conn.prepareStatement(
+                    "INSERT INTO fields (board_id, x, y, value) VALUES (?, ?, ?, ?)")) {
+                for (int x = 0; x < SudokuBoard.GRID_SIZE; x++) {
+                    for (int y = 0; y < SudokuBoard.GRID_SIZE; y++) {
+                        insertField.setLong(1, boardId);
+                        insertField.setInt(2, x);
+                        insertField.setInt(3, y);
+                        insertField.setInt(4, obj.get(x, y));
+                        insertField.executeUpdate();
+                    }
                 }
             }
 
             conn.commit();
         } catch (SQLException e) {
             logger.error("Error writing SudokuBoard to database", e);
-            if (conn != null) {
-                try {
-                    conn.rollback();
-                } catch (SQLException ex) {
-                    logger.error("Error on rollback", ex);
-                }
-            }
             throw new SudokuDatabaseException("DatabaseWriteError", e);
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    logger.error("Error closing connection", e);
-                }
-            }
         }
     }
+
 
     @Override
     public void close() throws SudokuException {
